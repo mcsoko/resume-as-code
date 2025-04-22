@@ -1,2 +1,11 @@
 output/
 .venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg
+*.egg-info/
+dist/
+build/
+.env
+.DS_Store
