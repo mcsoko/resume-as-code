@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ resume.metadata.name }} - Resume</title>
+    <link rel="stylesheet" href="css/resume-styles.css">
+</head>
+<body>
+    <header>
+        <h1>{{ resume.metadata.name }}</h1>
+        <div class="contact-info">
+            <div class="contact-item">
+                {{ resume.metadata.contact.phone }}
+            </div>
+            <span class="contact-separator">|</span>
+            <div class="contact-item">
+                <a href="mailto:{{ resume.metadata.contact.email }}">{{ resume.metadata.contact.email }}</a>
+            </div>
+            <span class="contact-separator">|</span>
+            <div class="contact-item">
+                {{ resume.metadata.location }}
+            </div>
+            <span class="contact-separator">|</span>
+            <div class="contact-item">
+                <a href="https://{{ resume.metadata.contact.linkedin }}" target="_blank">{{ resume.metadata.contact.linkedin }}</a>
+            </div>
+        </div>
+    </header>
+     
+    <div class="section">
+        <h2 class="section-header">{{ resume.position.title }}</h2>
+        <div class="contact-info">
+                <span class="keywords">{{ resume.position.keywords | join(' | ') }}</span>
+
+        </div>
+        <p class="summary">{% if resume.summary %}{{ resume.summary }}{% else %}Experienced infrastructure architect with expertise in platform engineering, Kubernetes, and cloud technologies.{% endif %}</p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-header">Areas of Expertise</h2>
+        <div class="skills-container">
+            <div class="skills-label">Professional Skills</div>
+            <div class="skills-list">
+                {% for skill in resume.core_skills %}
+                <div class="skill-item">{{ skill }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        {% if resume.additional_skills %}
+        <div class="skills-container">
+            <div class="skills-label">Technical Skills</div>
+            <div class="skills-list">
+                {% for skill in resume.additional_skills %}
+                <div class="skill-item">{{ skill }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h2 class="section-header">Professional Experience</h2>
+        {% for exp in resume.experience %}
+        <div class="experience-item">
+            <div class="job-header">
+                <div class="job-title">{{ exp.title }}</div>
+                <div class="dates">{{ exp.period }}</div>
+            </div>
+            <div class="company-location">{{ exp.company }} | {{ exp.location }}</div>
+            
+            {% if exp.description %}
+            <p class="role-description">{{ exp.description }}</p>
+            {% endif %}
+            
+            {% if exp.highlights %}
+            <ul class="highlights">
+                {% for highlight in exp.highlights %}
+                <li>{{ highlight }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2 class="section-header">Education</h2>
+        <ul class="highlights">
+            {% for edu in resume.education %}
+            {% if edu.degree %}
+            <li class="education-item">
+                <span class="credential">{{ edu.degree }}</span> — 
+                <span class="institution">{{ edu.institution }}</span>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-header">Certifications</h2>
+        <ul class="highlights">
+            {% for edu in resume.education %}
+            {% if edu.certification %}
+            <li class="certification-item">
+                <span class="certification">{{ edu.certification }}</span>
+                {% if edu.description %} — <span class="organization">{{ edu.description }}</span>{% endif %}
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if resume.publications %}
+    <div class="section">
+        <h2 class="section-header">Publications & Speaking</h2>
+        <ul class="highlights">
+            {% for pub in resume.publications %}
+            <li><em>"{{ pub.title }}"</em>{% if pub.venue %} — {{ pub.venue }}{% endif %}</li>
+            {% endfor %}
+            {% for pub in resume.publications %}
+            {% if pub.url %}
+            <li>Blog: <a href="{{ pub.url }}" target="_blank">{{ pub.url }}</a></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html> 

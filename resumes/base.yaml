@@ -1,0 +1,77 @@
+metadata:
+  name: "Alex Morgan"
+  title: "Senior Cloud Infrastructure Engineer"
+  location: "Seattle, WA"
+  contact:
+    email: "alex.morgan@example.com"
+    phone: "(555) 123-4567"
+    linkedin: "linkedin.com/in/alexmorgan"
+    github: "github.com/alexmorg"
+
+position:
+  title: "Senior Cloud Infrastructure Engineer"
+  keywords:
+    - "Cloud Architecture"
+    - "DevOps"
+    - "Site Reliability Engineering"
+summary: |
+  Senior Cloud Infrastructure Engineer with 8+ years of experience designing and implementing 
+  scalable cloud solutions. Specialized in AWS, Kubernetes, and infrastructure as code.
+  Proven track record of optimizing cloud resources, reducing costs, and improving system reliability.
+
+core_skills:
+  - "Cloud Platforms: AWS, GCP, Azure"
+  - "Container Orchestration: Kubernetes, Docker Swarm"
+  - "CI/CD: Jenkins, GitHub Actions, CircleCI"
+  - "Infrastructure as Code: Terraform, CloudFormation"
+  - "Configuration Management: Ansible, Chef"
+  - "Monitoring & Observability: Prometheus, Grafana, ELK Stack"
+  - "Programming: Python, Bash, Go"
+  - "Security: IAM, Secret Management, Compliance"
+  - "Networking: VPCs, Load Balancing, CDNs"
+
+experience:
+  - company: "TechCloud Solutions"
+    title: "Senior Cloud Infrastructure Engineer"
+    period: "2020 – Present"
+    location: "Seattle, WA"
+    description: |
+      Lead cloud infrastructure team responsible for managing multi-region AWS and GCP deployments.
+      Design and implement scalable, fault-tolerant architectures for enterprise applications.
+      Establish best practices for cloud security, cost optimization, and infrastructure automation.
+
+  - company: "DataSphere Inc."
+    title: "DevOps Engineer → Cloud Infrastructure Engineer"
+    period: "2017 – 2020"
+    location: "San Francisco, CA"
+    highlights:
+      - "Migrated monolithic applications to containerized microservices in Kubernetes"
+      - "Implemented Infrastructure as Code using Terraform across all environments"
+      - "Reduced cloud infrastructure costs by 35% through resource optimization"
+      - "Built CI/CD pipelines for 20+ microservices using Jenkins and GitHub Actions"
+      - "Implemented automated disaster recovery procedures reducing RTO from days to hours"
+
+  - company: "Innovative Systems"
+    title: "Systems Administrator"
+    period: "2015 – 2017"
+    location: "Portland, OR"
+    highlights:
+      - "Managed on-premises infrastructure including VMware virtualization"
+      - "Implemented monitoring solutions using Nagios and Zabbix"
+      - "Automated routine system administration tasks with Bash and Python scripts"
+      - "Led initial cloud migration projects to AWS"
+
+education:
+  - degree: "B.S. Computer Science"
+    institution: "University of Washington"
+  - certification: "AWS Certified Solutions Architect – Professional"
+  - certification: "Certified Kubernetes Administrator (CKA)"
+  - certification: "HashiCorp Certified: Terraform Associate"
+
+publications:
+  - title: "Implementing Zero Trust Security in Kubernetes Environments"
+    venue: "Cloud Computing Conference 2023"
+  - title: "Cost Optimization Strategies for Multi-Cloud Deployments"
+    venue: "DevOps Days 2022"
+  - title: "Infrastructure Engineering Blog"
+    url: "https://cloudinfrablog.example.com" 
