@@ -1,0 +1,88 @@
+# ATS Keywords Configuration
+# 
+# This file contains keyword categories for ATS validation.
+# Add your keywords to customize the validation for your industry or job type.
+# The validator will look for these keywords in your resume.
+
+# Technical skills and technologies
+technical:
+  # Software Development
+  - python
+  - javascript
+  - java
+  - c++
+  - golang
+  - rust
+  - typescript
+  - node.js
+  - react
+  - angular
+  - vue.js
+  
+  # DevOps/Infrastructure
+  - kubernetes
+  - docker
+  - aws
+  - azure
+  - gcp
+  - terraform
+  - ansible
+  - jenkins
+  - github
+  - gitlab
+  - ci/cd
+  - devops
+  - sre
+  - infrastructure as code
+  - cloud
+  - monitoring
+  - logging
+  - prometheus
+  - grafana
+  
+  # Data
+  - sql
+  - nosql
+  - mongodb
+  - postgresql
+  - mysql
+  - data analysis
+  - data science
+  - machine learning
+  - ai
+  - big data
+  - etl
+  - data warehouse
+  - data pipeline
+
+# Soft skills and qualities
+soft:
+  - leadership
+  - communication
+  - collaboration
+  - problem-solving
+  - mentoring
+  - teamwork
+  - project management
+  - agile
+  - scrum
+  - critical thinking
+  - time management
+  - attention to detail
+  - creativity
+  - adaptability
+  - flexibility
+  - initiative
+  - self-motivated
+  - customer-focused
+  - business acumen
+  - negotiation
+  - conflict resolution
+  
+# ATS-friendly formatting elements to check for
+formatting:
+  - bullet points
+  - clear headings
+  - consistent formatting
+  - appropriate spacing
+  - chronological order 

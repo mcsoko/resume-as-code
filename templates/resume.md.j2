@@ -1,0 +1,68 @@
+# {{ resume.metadata.name }}  
+**{{ resume.metadata.title }}**  
+{{ resume.metadata.location }}  
+[{{ resume.metadata.contact.email }}](mailto:{{ resume.metadata.contact.email }}) | {{ resume.metadata.contact.phone }}  
+[{{ resume.metadata.contact.linkedin }}](https://{{ resume.metadata.contact.linkedin }}) | [{{ resume.metadata.contact.github }}](https://{{ resume.metadata.contact.github }})
+
+---
+
+## Summary
+{{ resume.summary }}
+
+---
+
+## Core Skills
+{% for skill in resume.core_skills %}
+- {{ skill }}
+{% endfor %}
+
+{% if resume.additional_skills %}
+## Additional Skills
+{% for skill in resume.additional_skills %}
+- {{ skill }}
+{% endfor %}
+{% endif %}
+
+---
+
+## Experience
+{% for exp in resume.experience %}
+### **{{ exp.title }}**  
+**{{ exp.company }}** — *{{ exp.period }}*  
+{{ exp.location }}
+
+{% if exp.description %}
+{{ exp.description }}
+{% endif %}
+
+{% if exp.highlights %}
+{% for highlight in exp.highlights %}
+- {{ highlight }}
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+
+---
+
+## Education & Certifications
+{% for edu in resume.education %}
+- **{{ edu.degree }}** — {{ edu.institution }}
+{% endfor %}
+{% for cert in resume.education %}
+{% if cert.certification %}
+- **{{ cert.certification }}**{% if cert.description %} — {{ cert.description }}{% endif %}
+{% endif %}
+{% endfor %}
+
+---
+
+## Publications & Speaking
+{% for pub in resume.publications %}
+- *"{{ pub.title }}"*{% if pub.venue %} — {{ pub.venue }}{% endif %}
+{% endfor %}
+{% for pub in resume.publications %}
+{% if pub.url %}
+- Blog: [{{ pub.url }}]({{ pub.url }})
+{% endif %}
+{% endfor %} 
