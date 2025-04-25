@@ -10,7 +10,7 @@ A modern, maintainable approach to managing your resume with version control and
   - HTML (beautiful, responsive web version)
   - PDF (professional print version via HTML-to-PDF)
 - Template-based rendering using Jinja2
-- Externalized CSS for easy styling and hot-reloading
+- Externalized CSS for easy style customization
 - ATS (Applicant Tracking System) validation and scoring
 - Job description matching and keyword analysis
 
@@ -20,7 +20,10 @@ A modern, maintainable approach to managing your resume with version control and
    ```bash
    pip install -r requirements.txt
    ```
-
+   Mac OS dependencies:
+   ````
+   brew install cairo pango gdk-pixbuf libffi glib gobject-introspection
+   ````
 2. For the resume rendering script:
    ```bash
    pip install yq PyYAML
@@ -53,32 +56,34 @@ A modern, maintainable approach to managing your resume with version control and
 
 ## Usage
 
-### Generating Resumes
+### Generating Resume HTML
 
-To generate a customized resume with an overlay:
+````bash
+# Default template at templates/resume.html.j2
+python ./scripts/render_resume.py resumes/base.yaml output/resume.html
+````
+````bash
+# Use a different template file
+python ./scripts/render_resume.py resumes/base.yaml output/resume.html -t templates/academic.j2
+````
+````bash
+# Merge an overlay
+python ./scripts/render_resume.py resumes/base.yaml output/resume.html -o resumes/overlays/job_specific.yaml -t templates/academic.j2
+````
 
-```bash
-# Generate HTML
-./scripts/render_resume.sh resumes/base.yaml output/software-engineer.html resumes/overlays/software-engineering.yaml
-
-# Generate PDF via HTML
+### Generate PDF via HTML
+````bash
 python scripts/html_to_pdf.py output/software-engineer.html output/software-engineer.pdf
-```
+````
 
-To generate the base resume without overlays:
-
-```bash
-./scripts/render_resume.sh resumes/base.yaml output/base-resume.html
-python scripts/html_to_pdf.py output/base-resume.html output/base-resume.pdf
-```
 
 ### Hot-Reload Workflow for Styling
 
-The resume uses an external CSS file for easy styling. This enables a hot-reload workflow for fast visual tweaks:
+The resume uses an external CSS file for easy styling. This enables a browser reload workflow for fast visual tweaks:
 
 1. Generate the HTML resume:
    ```bash
-   ./scripts/render_resume.sh resumes/base.yaml output/resume.html resumes/overlays/software-engineering.yaml
+   python ./scripts/render_resume.py resumes/base.yaml output/resume.html
    ```
 
 2. Open the generated HTML file in a browser:

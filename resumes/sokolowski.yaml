@@ -1,0 +1,92 @@
+metadata:
+  name: "Michael Sokolowski"
+  title: "Principal Infrastructure Architect"
+  location: "Madison, WI"
+  contact:
+    email: "mcsoko@mcsoko.com"
+    phone: "608.338.9706"
+    linkedin: "linkedin.com/in/mikesoko"
+    github: "github.com/mcsoko"
+
+position:
+  title: "Platform Architect"
+  keywords:
+    - "Cloud Architecture"
+    - "DevOps"
+    - "Site Reliability Engineering"
+summary: |
+  Principal Infrastructure Architect with a strong background
+  in platform engineering, DevOps, and cloud computing. I enjoy designing 
+  solutions that make a tangible impact on the business, whether it’s 
+  leading the architecture of internal developer platforms, solving cross-functional 
+  challenges, or identifying ways to save millions in costs. Skilled at 
+  framing technical decisions in business terms, I ensure stakeholders see 
+  the strategic value behind each solution. I’m also passionate about mentoring, 
+  fostering cross-team collaboration, and continuously improving how we build and manage 
+  infrastructure.
+
+skills:
+  - category: "Leadership"
+    skill:
+      - "Enterprise Architecture"
+      - "Platform Engineering"
+      - "Product Owner"
+      - "IT Systems Strategy and Roadmap"
+      - "Business-Technical Alignment"
+      - "Mentorship and Leadership"
+  - category: "Technical"
+    skill:
+      - "Cloud Provider Platforms (AWS)"
+      - "CI/CD Pipelines (Jenkins, GitOps)"
+      - "Infrastructure-as-Code (Terraform)"
+      - "Containerization and Orchestration (OpenShift, Kubernetes)"
+      - "Observability (Monitoring, Logging, Performance)"
+      - "Secrets Management (HashiCorp Vault)"
+      - "Microservices Architecture (12-Factor Apps)"
+      - "Task Queuing and Automation (Kafka, RabbitMQ)"
+
+experience:
+  - company: "UScellular"
+    title: "Principal Infrastructure Architect"
+    period: "April 2020 – Present"
+    location: "Remote - Madison, WI"
+    description: |
+      Define and execute enterprise‐wide IT infrastructure strategy and standards; 
+      Architect and automate cloud-native microservice and traditional solutions;
+      Develop business cases and secure executive sponsorship;
+      Lead technical governance and mentor cross-functional teams.
+    highlights:
+      - Proposed and led development of an internal developer platform—managed as a strategic product—replacing a 
+        commercial solution to save $1.6M, reduce provisioning time from ~2 days to 10 minutes, and eliminate friction 
+        to enable developer autonomy and accelerate delivery velocity.
+      - Partnered with the development team to re-architect an underperforming internal platform, eliminating 
+        performance bottlenecks and optimizing infrastructure—achieving a 29x speed improvement and $300K in annual cost savings.
+  - company: "UScellular"
+    title: "Sr. Infrastructure Architect"
+    period: "August 2013 - April 2020"
+    location: "Remote - Madison, WI"
+    description: |
+      Execute enterprise‐wide IT infrastructure strategy; Partner with cross-functional teams and vendor stakeholders to align infrastructure 
+      roadmaps with business goals, drive technology adoption, and deliver scalable, future-ready solutions.
+    highlights:
+      - Engineered a secure, cost-effective solution to extend the life of a mission-critical frontline system by 5 years—avoiding $2M in 
+        immediate costs and giving the enterprise time to fund and plan a strategic modernization.
+      - Founded and led a cross-functional DevOps governance team with members from development, infrastructure, security, and architecture—driving 
+        organization-wide standards for secure, high-quality application and microservices delivery.
+  - company: "UScellular"
+    title: "Sr. Infrastructure Engineer"
+    period: "September 2010 – August 2013"
+    location: "Madison, WI"
+    description: |
+      Lead the design, deployment, and administration of virtualized infrastructure across enterprise environments. 
+      Provided technical leadership in capacity planning, performance tuning, and operational excellence, ensuring high availability, scalability,
+       and security of critical systems.
+    highlights:
+      - Served as technical lead for server, virtualization, and client access domains within a large-scale B/OSS transformation program—driving integration, 
+        reliability, and performance across foundational systems critical to billing, provisioning, and customer operations. 
+
+education:
+  - certification: "AWS Certified Cloud Practitioner"
+  - certification: "HashiCorp Certified: Terraform Associate"
+
+publications:
