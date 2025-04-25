@@ -26,12 +26,12 @@ A modern, maintainable approach to managing your resume with version control and
    ````
 2. For the resume rendering script:
    ```bash
-   pip install yq PyYAML
+   pip install PyYAML jinja2
    ```
 
-3. For ATS validation:
+3. For PDF generation and ATS validation:
    ```bash
-   pip install resume-parser spacy
+   pip install weasyprint resume-parser spacy
    python -m spacy download en_core_web_md
    ```
 
@@ -42,13 +42,13 @@ A modern, maintainable approach to managing your resume with version control and
 ├── resumes/
 │   ├── base.yaml         # Your base resume
 │   └── overlays/         # Job-specific overlays
-│       └── software-engineering.yaml
+│       └── overlay.yaml
 ├── templates/            # Jinja2 templates
 │   └── resume.html.j2    # HTML template
 ├── css/
 │   └── resume-styles.css # External CSS for styling
 ├── scripts/
-│   ├── render_resume.sh  # Simple script to render HTML
+│   ├── render_resume.py  # Python script to render HTML
 │   ├── html_to_pdf.py    # Convert HTML to PDF using WeasyPrint
 │   └── validate_ats.py   # ATS validation script
 └── output/               # Generated files
@@ -60,20 +60,20 @@ A modern, maintainable approach to managing your resume with version control and
 
 ````bash
 # Default template at templates/resume.html.j2
-python ./scripts/render_resume.py resumes/base.yaml output/resume.html
+python scripts/render_resume.py resumes/base.yaml output/resume.html
 ````
 ````bash
 # Use a different template file
-python ./scripts/render_resume.py resumes/base.yaml output/resume.html -t templates/academic.j2
+python scripts/render_resume.py resumes/base.yaml output/resume.html -t templates/academic.j2
 ````
 ````bash
 # Merge an overlay
-python ./scripts/render_resume.py resumes/base.yaml output/resume.html -o resumes/overlays/job_specific.yaml -t templates/academic.j2
+python scripts/render_resume.py resumes/base.yaml output/resume.html -o resumes/overlays/overlay.yaml
 ````
 
 ### Generate PDF via HTML
 ````bash
-python scripts/html_to_pdf.py output/software-engineer.html output/software-engineer.pdf
+python scripts/html_to_pdf.py output/resume.html output/resume.pdf
 ````
 
 
@@ -83,7 +83,7 @@ The resume uses an external CSS file for easy styling. This enables a browser re
 
 1. Generate the HTML resume:
    ```bash
-   python ./scripts/render_resume.py resumes/base.yaml output/resume.html
+   python scripts/render_resume.py resumes/base.yaml output/resume.html
    ```
 
 2. Open the generated HTML file in a browser:
@@ -127,7 +127,7 @@ python scripts/validate_ats.py <path-to-resume.pdf> <path-to-job-description.txt
 
 For example:
 ```bash
-python scripts/validate_ats.py output/base.pdf job_description.txt
+python scripts/validate_ats.py output/resume.pdf job_description.txt
 ```
 
 #### Features of ATS Validation
@@ -162,8 +162,16 @@ A typical resume YAML structure includes:
 
 - **metadata**: Name, title, location, and contact info
 - **summary**: Professional summary/objective
-- **core_skills**: Primary technical and professional skills
-- **additional_skills**: Optional supplementary skills
+- **skills**: Skills organized by category
+  ```yaml
+  skills:
+    Technical:
+      - "Languages: Python, JavaScript, TypeScript"
+      - "Cloud: AWS, GCP, Azure"
+    Leadership:
+      - "Team Management"
+      - "Agile Methodologies"
+  ```
 - **experience**: Work history with company, title, period, location, description, and highlights
 - **education**: Educational background and certifications
 - **publications**: Publications, presentations, and speaking engagements
@@ -173,23 +181,103 @@ A typical resume YAML structure includes:
 Overlays are YAML files that can modify or extend your base resume. They can:
 - Override metadata fields like title
 - Replace the summary
-- Add additional skills
-- Override experience highlights for specific roles
+- Add or modify skills by category
+- Add or modify experience entries and highlights
 
 Example overlay:
 ```yaml
+# Use append mode for highlights but replace other fields
+_append: [highlights]
+
 metadata:
   title: "Senior Software Engineer"
-  summary: "Experienced software engineer specializing in cloud-native applications..."
-core_skills:
-  - "Cloud: AWS, Azure, GCP"
-  - "Containerization: Docker, Kubernetes"
+
+summary: "Experienced software engineer specializing in cloud-native applications..."
+
+skills:
+  Technical:
+    - "Cloud: AWS, Azure, GCP"
+    - "Containerization: Docker, Kubernetes"
+  Leadership:
+    - "Team Management" 
+    - "Agile Coaching"
+
 experience:
   - company: "Tech Corp"
+    title: "Senior Engineer" 
     highlights:
       - "Led migration of legacy systems to microservices architecture"
       - "Implemented CI/CD pipeline using GitHub Actions"
 ```
+
+## Enhanced Merge System
+
+The resume system includes a simple but powerful merging engine inspired by Helm's approach to merging YAML files.
+
+### Merge Control Keys
+
+The following special keys can be used in overlay files to control merging behavior:
+
+- **`_append`**: Controls which lists should be appended rather than replaced
+  - Can be `true` (for all lists)
+  - Can be a list of field names (e.g., `[highlights, Technical, Leadership]`)
+
+- **`_merge`**: Controls which dictionary fields should be merged rather than replaced
+  - Defaults to `true` (merge all dictionaries)
+  - Can be a list of field names to merge
+
+### Simple Example
+
+This example appends highlights while replacing skills:
+
+```yaml
+# Append only the highlights field
+_append: [highlights]
+
+# Skills to add (will replace existing skills)
+skills:
+  Leadership:
+    - "Cross-functional Collaboration"
+    - "Strategic Planning"
+  Technical:
+    - "GitOps"
+    - "Service Mesh"
+
+# Experience highlights to add (will be appended)
+experience:
+  - company: "ACME Corp"
+    title: "Senior Engineer"
+    highlights:
+      - "Led migration to microservices architecture reducing deployment time by 80%"
+
+# Add a certification (will replace any existing education)
+education:
+  - certification: "AWS Certified Solutions Architect"
+```
+
+### Global Append Mode
+
+To append all lists in your overlay to the base resume:
+
+```yaml
+# Append all lists instead of replacing them
+_append: true
+
+skills:
+  Leadership:
+    - "New Skill 1"
+    - "New Skill 2"
+
+experience:
+  - company: "New Company"
+    title: "New Position"
+    period: "2022 - Present"
+    location: "Remote"
+    highlights:
+      - "Will be added as a new experience entry"
+```
+
+This merge system provides a simpler, more intuitive way to customize your resume for different job applications while maintaining a single source of truth in your base resume.
 
 ## ATS Optimization Tips
 

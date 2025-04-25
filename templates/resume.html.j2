@@ -40,11 +40,11 @@
     <div class="section">
         <h2 class="section-header">Skills</h2>
 
-        {% for skills in resume.skills %}
+        {% for category, skill_list in resume.skills.items() if not category.startswith('_') %}
         <div class="skills-container">
-            <div class="skills-label">{{ skills.category }}:</div>
+            <div class="skills-label">{{ category }}:</div>
             <div class="skills-list">
-                {% for skill in skills.skill %}
+                {% for skill in skill_list %}
                 <div class="skill-item">{{ skill }};</div>
                 {% endfor %}
             </div>
@@ -76,33 +76,42 @@
         </div>
         {% endfor %}
     </div>
-    {% for edu in resume.education %}
-    {% if edu.degree %}
+    {% if resume.education %}
     <div class="section">
-        <h2 class="section-header">Education</h2>
-        <ul class="highlights">
-            <li class="education-item">
-                <span class="credential">{{ edu.degree }}</span> — 
-                <span class="institution">{{ edu.institution }}</span>
-            </li>
-        </ul>
-    </div>
-    {% endif %}
-    {% endfor %}
-
-    <div class="section">
-        <h2 class="section-header">Certifications</h2>
-        <ul class="highlights">
+        <h2 class="section-header">Education & Certifications</h2>
+        <ul class="education-list">
             {% for edu in resume.education %}
-            {% if edu.certification %}
-            <li class="certification-item">
-                <span class="certification">{{ edu.certification }}</span>
-                {% if edu.description %} — <span class="organization">{{ edu.description }}</span>{% endif %}
-            </li>
-            {% endif %}
+                {% if edu.degree %}
+                <li class="education-item">
+                    <div class="education-header">
+                        <span class="credential">{{ edu.degree }}</span>
+                        {% if edu.period %}<span class="period">{{ edu.period }}</span>{% endif %}
+                    </div>
+                    <div class="education-details">
+                        <span class="institution">{{ edu.institution }}</span>
+                    </div>
+                </li>
+                {% endif %}
+            {% endfor %}
+            
+            {% for cert in resume.education %}
+                {% if cert.certification %}
+                <li class="certification-item">
+                    <div class="certification-header">
+                        <span class="credential">{{ cert.certification }}</span>
+                        {% if cert.period %}<span class="period">{{ cert.period }}</span>{% endif %}
+                    </div>
+                    {% if cert.description %}
+                    <div class="certification-details">
+                        <span class="institution">{{ cert.description }}</span>
+                    </div>
+                    {% endif %}
+                </li>
+                {% endif %}
             {% endfor %}
         </ul>
     </div>
+    {% endif %}
 
     {% if resume.publications %}
     <div class="section">

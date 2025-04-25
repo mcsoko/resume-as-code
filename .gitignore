@@ -9,5 +9,5 @@ dist/
 build/
 .env
 .DS_Store
-resume/sokolowski.yaml
-resume/sokolowski*
+resumes/sokolowski.yaml
+resumes/sokolowski*

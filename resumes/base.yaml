@@ -1,77 +1,88 @@
 metadata:
-  name: "Alex Morgan"
-  title: "Senior Cloud Infrastructure Engineer"
-  location: "Seattle, WA"
+  name: "Jane Doe"
+  title: "Senior Cloud Architect"
+  location: "Austin, TX"
   contact:
-    email: "alex.morgan@example.com"
-    phone: "(555) 123-4567"
-    linkedin: "linkedin.com/in/alexmorgan"
-    github: "github.com/alexmorg"
+    email: "jane.doe@example.com"
+    phone: "555-123-4567"
+    linkedin: "linkedin.com/in/janedoe"
+    github: "github.com/janedoe"
 
 position:
-  title: "Senior Cloud Infrastructure Engineer"
+  title: "Cloud Solutions Architect"
   keywords:
     - "Cloud Architecture"
     - "DevOps"
     - "Site Reliability Engineering"
 summary: |
-  Senior Cloud Infrastructure Engineer with 8+ years of experience designing and implementing 
-  scalable cloud solutions. Specialized in AWS, Kubernetes, and infrastructure as code.
-  Proven track record of optimizing cloud resources, reducing costs, and improving system reliability.
+  Senior Cloud Architect with extensive experience in designing and implementing 
+  scalable cloud solutions. Passionate about creating efficient, cost-effective 
+  infrastructure that enables business agility. Skilled at translating technical 
+  concepts for non-technical stakeholders and building consensus across teams.
+  Focused on mentoring junior engineers and promoting best practices across 
+  the organization.
 
-core_skills:
-  - "Cloud Platforms: AWS, GCP, Azure"
-  - "Container Orchestration: Kubernetes, Docker Swarm"
-  - "CI/CD: Jenkins, GitHub Actions, CircleCI"
-  - "Infrastructure as Code: Terraform, CloudFormation"
-  - "Configuration Management: Ansible, Chef"
-  - "Monitoring & Observability: Prometheus, Grafana, ELK Stack"
-  - "Programming: Python, Bash, Go"
-  - "Security: IAM, Secret Management, Compliance"
-  - "Networking: VPCs, Load Balancing, CDNs"
+skills:
+  Leadership:
+    - "Enterprise Architecture"
+    - "Team Leadership"
+    - "Strategic Planning"
+    - "Project Management"
+    - "Business-Technical Alignment"
+    - "Mentoring"
+  Technical:
+    - "Cloud Platforms (AWS, Azure, GCP)"
+    - "Infrastructure as Code (Terraform, CloudFormation)"
+    - "Containerization (Docker, Kubernetes)"
+    - "CI/CD Pipelines (Jenkins, GitHub Actions)"
+    - "Monitoring and Observability"
+    - "Serverless Architecture"
+    - "Microservices Design"
+    - "API Design and Implementation"
 
 experience:
-  - company: "TechCloud Solutions"
-    title: "Senior Cloud Infrastructure Engineer"
-    period: "2020 – Present"
-    location: "Seattle, WA"
+  - company: "Tech Solutions Inc."
+    title: "Senior Cloud Architect"
+    period: "January 2020 – Present"
+    location: "Austin, TX"
     description: |
-      Lead cloud infrastructure team responsible for managing multi-region AWS and GCP deployments.
-      Design and implement scalable, fault-tolerant architectures for enterprise applications.
-      Establish best practices for cloud security, cost optimization, and infrastructure automation.
-
-  - company: "DataSphere Inc."
-    title: "DevOps Engineer → Cloud Infrastructure Engineer"
-    period: "2017 – 2020"
-    location: "San Francisco, CA"
+      Lead cloud architecture initiatives and establish best practices for 
+      enterprise-wide cloud adoption. Design and implement scalable, secure 
+      infrastructure solutions while mentoring junior team members.
     highlights:
-      - "Migrated monolithic applications to containerized microservices in Kubernetes"
-      - "Implemented Infrastructure as Code using Terraform across all environments"
-      - "Reduced cloud infrastructure costs by 35% through resource optimization"
-      - "Built CI/CD pipelines for 20+ microservices using Jenkins and GitHub Actions"
-      - "Implemented automated disaster recovery procedures reducing RTO from days to hours"
-
-  - company: "Innovative Systems"
-    title: "Systems Administrator"
-    period: "2015 – 2017"
-    location: "Portland, OR"
+      - "Led the migration of 50+ applications to cloud-native architecture, reducing infrastructure costs by 35% and improving scalability."
+      - "Established a Cloud Center of Excellence that improved deployment efficiency by 60% and reduced security incidents by 40%."
+  - company: "Tech Solutions Inc."
+    title: "Cloud Engineer"
+    period: "March 2017 - December 2019"
+    location: "Austin, TX"
+    description: |
+      Designed and implemented cloud infrastructure for critical business applications. 
+      Automated deployment processes and improved system reliability.
     highlights:
-      - "Managed on-premises infrastructure including VMware virtualization"
-      - "Implemented monitoring solutions using Nagios and Zabbix"
-      - "Automated routine system administration tasks with Bash and Python scripts"
-      - "Led initial cloud migration projects to AWS"
+      - "Implemented infrastructure as code practices using Terraform, reducing provisioning time from days to minutes."
+      - "Built a self-service platform for developers that increased deployment frequency by 300% while maintaining security compliance."
+  - company: "Digital Innovations LLC"
+    title: "Systems Engineer"
+    period: "June 2014 – February 2017"
+    location: "Denver, CO"
+    description: |
+      Managed on-premises infrastructure and supported the initial cloud migration efforts.
+      Collaborated with development teams to improve system performance and reliability.
+    highlights:
+      - "Orchestrated the company's first cloud migration project, moving critical systems to AWS with zero downtime."
 
 education:
-  - degree: "B.S. Computer Science"
-    institution: "University of Washington"
-  - certification: "AWS Certified Solutions Architect – Professional"
-  - certification: "Certified Kubernetes Administrator (CKA)"
-  - certification: "HashiCorp Certified: Terraform Associate"
+  - degree: "M.S. Computer Science"
+    institution: "University of Texas at Austin"
+    period: "2012 - 2014"
+  - certification: "AWS Certified Solutions Architect - Professional"
+    period: "2020"
+  - certification: "Google Cloud Professional Cloud Architect"
+    period: "2021"
 
 publications:
-  - title: "Implementing Zero Trust Security in Kubernetes Environments"
-    venue: "Cloud Computing Conference 2023"
-  - title: "Cost Optimization Strategies for Multi-Cloud Deployments"
-    venue: "DevOps Days 2022"
-  - title: "Infrastructure Engineering Blog"
-    url: "https://cloudinfrablog.example.com" 
+  - title: "Building Resilient Cloud Infrastructure"
+    venue: "Cloud Computing Conference 2022"
+  - title: "Best Practices for Multi-Cloud Deployments"
+    venue: "DevOps Summit 2021"

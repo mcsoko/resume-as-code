@@ -287,3 +287,132 @@ a:hover {
         flex-direction: column;
     }
 } 
+
+/* ----------------------------------------
+   Responsive adjustments for tablets and small desktops
+---------------------------------------- */
+@media (max-width: 1024px) {
+  header {
+    padding: 1rem;
+  }
+  .contact-info {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  h1 {
+    font-size: 1.75rem;
+  }
+  .section {
+    padding: 1rem;
+  }
+  .skills-container,
+  .experience-item,
+  .education-item,
+  .certification-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .skills-label {
+    margin-bottom: 0.25rem;
+  }
+  .skills-list,
+  .highlights {
+    margin-left: 0;
+  }
+}
+
+/* ----------------------------------------
+   Dark mode support
+---------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #90caf9;
+    --accent: #4a5d80;
+    --light-accent: #333;
+    --text: #e0e0e0;
+    --light-text: #aaa;
+    --border: #444;
+  }
+  body {
+    background-color: #121212;
+    color: var(--text);
+  }
+  a, a:visited {
+    color: var(--primary);
+  }
+  header {
+    background-color: #1e1e1e;
+  }
+  .section {
+    background-color: transparent;
+    border-color: var(--border);
+  }
+  .highlights li {
+    border-color: var(--border);
+  }
+  .skills-container,
+  .experience-item {
+    background-color: transparent;
+  }
+}
+
+/* ----------------------------------------
+   Dark mode via .dark-mode class
+---------------------------------------- */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  body.dark-mode a,
+  body.dark-mode a:visited {
+    color: var(--primary);
+  }
+  body.dark-mode header {
+    background-color: #1e1e1e;
+  }
+  body.dark-mode .section {
+    background-color: transparent;
+    border-color: var(--border);
+  }
+  body.dark-mode .highlights li {
+    border-color: var(--border);
+  }
+  body.dark-mode .skills-container,
+  body.dark-mode .experience-item {
+    background-color: transparent;
+  }
+
+/* Add styles for education and certifications */
+.education-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.education-item, .certification-item {
+    margin-bottom: 16px;
+    break-inside: avoid;
+}
+
+.education-header, .certification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+}
+
+.credential {
+    font-weight: bold;
+}
+
+.period {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.education-details, .certification-details {
+    color: #444;
+}
+
+.institution {
+    font-style: italic;
+}
