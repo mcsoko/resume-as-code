@@ -3,9 +3,9 @@ metadata:
   title: "Senior Infrastructure Architect"
   location: "Oswego, IL"
   contact:
-    email: "wmaniates@icloud.com"
-    phone: "630-901-0161"
-    linkedin: "linkedin.com/in/mikesoko"
+    email: "xxxxxxx"
+    phone: "xxx-xxx-xxxx"
+    linkedin: "linkedin.com/in/william-maniates"
     github: "github.com/billmania42"
 
 position:
@@ -15,96 +15,108 @@ position:
     - "DevOps"
     - "Site Reliability Engineering"
 summary: |
-  Principal Infrastructure Architect with a strong background
-  in platform engineering, DevOps, and cloud computing. I enjoy designing 
-  solutions that make a tangible impact on the business, whether it’s 
-  leading the architecture of internal developer platforms, solving cross-functional 
-  challenges, or identifying ways to save millions in costs. Skilled at 
-  framing technical decisions in business terms, I ensure stakeholders see 
-  the strategic value behind each solution. I’m also passionate about mentoring, 
-  fostering cross-team collaboration, and continuously improving how we build and manage 
-  infrastructure.
-
+  blah, blah, blah
 skills:
   - category: "Leadership"
     skill:
-      - "Enterprise Architecture"
       - "Platform Engineering"
       - "Product Owner"
       - "IT Systems Strategy and Roadmap"
       - "Business-Technical Alignment"
       - "Mentorship and Leadership"
-  - category: "Technical"
+  - category: "Architecture Patterns"
+    skill:
+      - "Microservices (12-Factor Apps)"
+      - "Event Driven" 
+      - "Zero Trust" 
+  - category: "Programming Languages"
+    skill:
+      - "Bash"
+      - "Python"
+  - category: "DevOps Technologies"
     skill:
       - "Cloud Provider Platforms (AWS)"
-      - "CI/CD Pipelines (Jenkins, GitOps, Helm, Argo CD)"
+      - "CI/CD Pipelines (Jenkins, GitOps, Helm, Argo CD, GitHub Actions)"
       - "Infrastructure-as-Code (Terraform)"
-      - "Containerization and Orchestration (OpenShift, Kubernetes)"
+      - "Containerization and Orchestration (Docker, OpenShift, Kubernetes)"
       - "Observability (Monitoring, Logging, Performance)"
       - "Secrets Management (HashiCorp Vault, Sealed Secrets)"
-      - "Microservices Architecture (12-Factor Apps)"
-      - "Task Queuing and Automation (Kafka, RabbitMQ)"
+      - "Istio / Service Mesh"
+  - category: "Data Technologies"
+    skill:
+      - "Hadoop / HDFS"
+      - "PostgreSQL"
+      - "MongoDB"
+      - "Ceph"
+  - category: "Operating Systems"
+    skill:
+     - "Redhat Linux"
+     - "Ubuntu Linux"
 
 experience:
   - company: "UScellular"
     title: "Senior Infrastructure Architect"
     period: "June 2021 – Present"
-    location: "Remote - Oswego, IL"
+    location: "Hybrid - Chicago, IL"
     description: |
-      Define and execute enterprise‐wide IT infrastructure strategy and standards; 
-      Architect and automate cloud-native microservice and traditional solutions;
-      Develop business cases and secure executive sponsorship;
-      Lead technical governance and mentor cross-functional teams.
+      blah, blah, blah
     highlights:
-      - 
-      - 
+      - API mgmt / Istio 
+      - DDP product owner , DevEx Helm, Argo CD, GitHub actions, etc.
+      - AWS Marketing Project
   - company: "UScellular"
     title: "Lead Automation Engineer"
     period: "November 2017 - June 2021"
     location: "Schaumburg, IL"
     description: |
-      Execute enterprise‐wide IT infrastructure strategy; Partner with cross-functional teams and vendor stakeholders to align infrastructure 
-      roadmaps with business goals, drive technology adoption, and deliver scalable, future-ready solutions.
+      Technology lead for executing Engineering organization move to a DevOps approach to building and managing internal applications.
     highlights:
-      - 
-      - 
+      -  Lead development of a greenfield CI/CD Framework incorporating automated project onboarding, code quality and security scanning, and configuration as code for application deployments.  
+      -  I designed and built an OpenShift container runtime cluster for 40 automation and analytics engineers as part of our VP’s “Vision 2020” initiative.  
+         Also, I designed and built custom developer desktop VMs for developers to write their applications.
+      - Co-developed a network automation platform for managing cellular network components, using a microservices architecture. Patent awarded (citation to publication section).
+
   - company: "UScellular"
     title: "Lead Systems Support Engineer"
     period: "November 2015 – November 2017"
     location: "Schaumburg, IL"
     description: |
-      Lead the design, deployment, and administration of virtualized infrastructure across enterprise environments. 
-      Provided technical leadership in capacity planning, performance tuning, and operational excellence, ensuring high availability, scalability,
-       and security of critical systems.
+      blah, blah, blah
     highlights:
-      - 
+      - Data River initiative
+      - Hadoop project
+      - Openstack / NFV 
   - company: "UScellular"
     title: "Senior Systems Support Engineer"
     period: "June 2012 – November 2015"
     location: "Schaumburg, IL"
     description: |
-      Lead the design, deployment, and administration of virtualized infrastructure across enterprise environments. 
-      Provided technical leadership in capacity planning, performance tuning, and operational excellence, ensuring high availability, scalability,
-       and security of critical systems.
+      blah, blah, blah
     highlights:
-      - 
+      - Truecall project
+      - Satellite / Infra automation
 
 education:
-  - degree: "Bachelor of Science (B.S), Information Technology"
-    instution: "Colorado Technical University"
-    location: "Online"
-    graduation_date: "March 2023"
+  - certification: "Certified Kubernetes Application Developer (CKAD)"
+    issuer: "The Linux Foundation"
+    date: "January, 2025"
   - certification: "AWS Certified Cloud Practitioner"
     issuer: "Amazon"
-    date: "January 2025"
-  - certification: "Linux Foundation Certified Kubernetes Application Developer (CKAD)"
-    issuer: "Linux Foundation"
-    date: "January 2025"
-  - certification: "Linux Foundation Certified Kubernetes Administrator (CKA)"
-    issuer: "Linux Foundation"
-    date: "January 2025"
-  - certification: "Linux Foundation Certified Kubernetes Security (CKS)"
-    issuer: "Linux Foundation"
-    date: "January 2025"
+    date: "August, 2024"
+  - degree: "Bachelor of Science (B.S), Information Technology"
+    institution: "Colorado Technical University"
+    awards: "Summa Cum Laude"
+    graduation_date: "March, 2023"
 
 publications:
+  - title: "Made Up Presentation"
+    venue: "Kubecon 2023"
+  - title: "made up blogpost"
+    url: "www.nowhere.com/notreal"
+  - title: "Automated multi-node network performance testing"
+    patent:
+      number: "US12231323B2"
+      filed_date: "February 01, 2021"
+      award_date: "February 18, 2025"
+      award_year: "2025"
+      inventor: "Maniates, William James"

@@ -12,8 +12,11 @@
 ---
 
 ## Core Skills
-{% for skill in resume.core_skills %}
-- {{ skill }}
+{% for each in resume.skills %}
+- **{{ each.category }}**
+{% for a in each.skill %}
+  - {{ a }}
+{% endfor %}
 {% endfor %}
 
 {% if resume.additional_skills %}
@@ -27,9 +30,8 @@
 
 ## Experience
 {% for exp in resume.experience %}
-### **{{ exp.title }}**  
-**{{ exp.company }}** — *{{ exp.period }}*  
-{{ exp.location }}
+**{{ exp.title }}**, **{{ exp.company }}**
+{{ exp.location }}, *{{ exp.period }}*  
 
 {% if exp.description %}
 {{ exp.description }}
@@ -45,24 +47,28 @@
 
 ---
 
+{% if resume.education %}
 ## Education & Certifications
 {% for edu in resume.education %}
 {% if edu.degree %}
-- **{{ edu.degree }}** — {{ edu.institution }} | {{ edu.graduation_date }}
+- **{{ edu.degree }}**, *{{ edu.institution }}*, {{ edu.graduation_date }}
 {% elif edu.certification %}
-- **{{ cert.certification }}**, *{{ edu.issuer }}* - {{ edu.date }}
+- **{{ edu.certification }}**, *{{ edu.issuer }}*, {{ edu.date }}
 {% endif %}
 {% endfor %}
 
 ---
-{{% if resume.publications %}}
+{% endif %}
+
+{% if resume.publications %}
 ## Publications & Speaking
-{% for pub in resume.publications %}
-- *"{{ pub.title }}"*{% if pub.venue %} — {{ pub.venue }}{% endif %}
-{% endfor %}
 {% for pub in resume.publications %}
 {% if pub.url %}
 - Blog: [{{ pub.url }}]({{ pub.url }})
+{% elif pub.patent %}
+- Patent: *{{ pub.patent.inventor }}. {{ pub.patent.award_year }}. {{ pub.title }}. {{ pub.patent.number }}, filed {{ pub.patent.filed_date }}, and issued {{ pub.patent.award_date }}.*
+{% else %}
+- *"{{ pub.title }}"*{% if pub.venue %} — {{ pub.venue }}{% endif %}
 {% endif %}
-{% endfor %} 
+{% endfor %}
 {% endif %}
