@@ -47,16 +47,15 @@
 
 ## Education & Certifications
 {% for edu in resume.education %}
-- **{{ edu.degree }}** — {{ edu.institution }}
-{% endfor %}
-{% for cert in resume.education %}
-{% if cert.certification %}
-- **{{ cert.certification }}**{% if cert.description %} — {{ cert.description }}{% endif %}
+{% if edu.degree %}
+- **{{ edu.degree }}** — {{ edu.institution }} | {{ edu.graduation_date }}
+{% elif edu.certification %}
+- **{{ cert.certification }}**, *{{ edu.issuer }}* - {{ edu.date }}
 {% endif %}
 {% endfor %}
 
 ---
-
+{{% if resume.publications %}}
 ## Publications & Speaking
 {% for pub in resume.publications %}
 - *"{{ pub.title }}"*{% if pub.venue %} — {{ pub.venue }}{% endif %}
@@ -66,3 +65,4 @@
 - Blog: [{{ pub.url }}]({{ pub.url }})
 {% endif %}
 {% endfor %} 
+{% endif %}

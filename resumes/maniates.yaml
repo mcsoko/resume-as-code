@@ -1,0 +1,110 @@
+metadata:
+  name: "William Maniates"
+  title: "Senior Infrastructure Architect"
+  location: "Oswego, IL"
+  contact:
+    email: "wmaniates@icloud.com"
+    phone: "630-901-0161"
+    linkedin: "linkedin.com/in/mikesoko"
+    github: "github.com/billmania42"
+
+position:
+  title: "Platform Architect"
+  keywords:
+    - "Cloud Architecture"
+    - "DevOps"
+    - "Site Reliability Engineering"
+summary: |
+  Principal Infrastructure Architect with a strong background
+  in platform engineering, DevOps, and cloud computing. I enjoy designing 
+  solutions that make a tangible impact on the business, whether it’s 
+  leading the architecture of internal developer platforms, solving cross-functional 
+  challenges, or identifying ways to save millions in costs. Skilled at 
+  framing technical decisions in business terms, I ensure stakeholders see 
+  the strategic value behind each solution. I’m also passionate about mentoring, 
+  fostering cross-team collaboration, and continuously improving how we build and manage 
+  infrastructure.
+
+skills:
+  - category: "Leadership"
+    skill:
+      - "Enterprise Architecture"
+      - "Platform Engineering"
+      - "Product Owner"
+      - "IT Systems Strategy and Roadmap"
+      - "Business-Technical Alignment"
+      - "Mentorship and Leadership"
+  - category: "Technical"
+    skill:
+      - "Cloud Provider Platforms (AWS)"
+      - "CI/CD Pipelines (Jenkins, GitOps, Helm, Argo CD)"
+      - "Infrastructure-as-Code (Terraform)"
+      - "Containerization and Orchestration (OpenShift, Kubernetes)"
+      - "Observability (Monitoring, Logging, Performance)"
+      - "Secrets Management (HashiCorp Vault, Sealed Secrets)"
+      - "Microservices Architecture (12-Factor Apps)"
+      - "Task Queuing and Automation (Kafka, RabbitMQ)"
+
+experience:
+  - company: "UScellular"
+    title: "Senior Infrastructure Architect"
+    period: "June 2021 – Present"
+    location: "Remote - Oswego, IL"
+    description: |
+      Define and execute enterprise‐wide IT infrastructure strategy and standards; 
+      Architect and automate cloud-native microservice and traditional solutions;
+      Develop business cases and secure executive sponsorship;
+      Lead technical governance and mentor cross-functional teams.
+    highlights:
+      - 
+      - 
+  - company: "UScellular"
+    title: "Lead Automation Engineer"
+    period: "November 2017 - June 2021"
+    location: "Schaumburg, IL"
+    description: |
+      Execute enterprise‐wide IT infrastructure strategy; Partner with cross-functional teams and vendor stakeholders to align infrastructure 
+      roadmaps with business goals, drive technology adoption, and deliver scalable, future-ready solutions.
+    highlights:
+      - 
+      - 
+  - company: "UScellular"
+    title: "Lead Systems Support Engineer"
+    period: "November 2015 – November 2017"
+    location: "Schaumburg, IL"
+    description: |
+      Lead the design, deployment, and administration of virtualized infrastructure across enterprise environments. 
+      Provided technical leadership in capacity planning, performance tuning, and operational excellence, ensuring high availability, scalability,
+       and security of critical systems.
+    highlights:
+      - 
+  - company: "UScellular"
+    title: "Senior Systems Support Engineer"
+    period: "June 2012 – November 2015"
+    location: "Schaumburg, IL"
+    description: |
+      Lead the design, deployment, and administration of virtualized infrastructure across enterprise environments. 
+      Provided technical leadership in capacity planning, performance tuning, and operational excellence, ensuring high availability, scalability,
+       and security of critical systems.
+    highlights:
+      - 
+
+education:
+  - degree: "Bachelor of Science (B.S), Information Technology"
+    instution: "Colorado Technical University"
+    location: "Online"
+    graduation_date: "March 2023"
+  - certification: "AWS Certified Cloud Practitioner"
+    issuer: "Amazon"
+    date: "January 2025"
+  - certification: "Linux Foundation Certified Kubernetes Application Developer (CKAD)"
+    issuer: "Linux Foundation"
+    date: "January 2025"
+  - certification: "Linux Foundation Certified Kubernetes Administrator (CKA)"
+    issuer: "Linux Foundation"
+    date: "January 2025"
+  - certification: "Linux Foundation Certified Kubernetes Security (CKS)"
+    issuer: "Linux Foundation"
+    date: "January 2025"
+
+publications:
