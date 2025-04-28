@@ -1,0 +1,19 @@
+metadata:
+  overlay: true
+  title:  DevOps Platform Engineer
+summary: DevOps role summary
+
+additional_skills:
+  - category: "Programming Languages"
+    skill:
+      - "Bash"
+      - "Python"
+  - category: "DevOps Technologies"
+    skill:
+      - "Cloud Provider Platforms (AWS)"
+      - "CI/CD Pipelines (Jenkins, GitOps, Helm, Argo CD, GitHub Actions)"
+      - "Infrastructure-as-Code (Terraform)"
+      - "Containerization and Orchestration (Docker, OpenShift, Kubernetes)"
+      - "Observability (Monitoring, Logging, Performance)"
+      - "Secrets Management (HashiCorp Vault, Sealed Secrets)"
+      - "Istio / Service Mesh"

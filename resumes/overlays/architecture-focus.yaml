@@ -1,0 +1,18 @@
+metadata:
+  overlay: true
+  title:  new title
+summary: new summary
+
+additional_skills:
+  - category: "Architecture Patterns"
+    skill:
+      - "Microservices (12-Factor Apps)"
+      - "Event Driven" 
+      - "Zero Trust" 
+
+experience_overrides:
+  - company: "UScellular"
+    title: "Senior Systems Support Engineer"
+    period: "June 2012 - November 2015"
+    highlights:
+      - "Architected new backup solution for for Engineering servers/storage saving $XXXX, and reducing RTO by 40%."

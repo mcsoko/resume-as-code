@@ -24,24 +24,7 @@ skills:
       - "IT Systems Strategy and Roadmap"
       - "Business-Technical Alignment"
       - "Mentorship and Leadership"
-  - category: "Architecture Patterns"
-    skill:
-      - "Microservices (12-Factor Apps)"
-      - "Event Driven" 
-      - "Zero Trust" 
-  - category: "Programming Languages"
-    skill:
-      - "Bash"
-      - "Python"
-  - category: "DevOps Technologies"
-    skill:
-      - "Cloud Provider Platforms (AWS)"
-      - "CI/CD Pipelines (Jenkins, GitOps, Helm, Argo CD, GitHub Actions)"
-      - "Infrastructure-as-Code (Terraform)"
-      - "Containerization and Orchestration (Docker, OpenShift, Kubernetes)"
-      - "Observability (Monitoring, Logging, Performance)"
-      - "Secrets Management (HashiCorp Vault, Sealed Secrets)"
-      - "Istio / Service Mesh"
+
   - category: "Data Technologies"
     skill:
       - "Hadoop / HDFS"

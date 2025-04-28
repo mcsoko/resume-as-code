@@ -21,8 +21,11 @@
 
 {% if resume.additional_skills %}
 ## Additional Skills
-{% for skill in resume.additional_skills %}
-- {{ skill }}
+{% for each in resume.additional_skills %}
+- **{{ each.category }}**
+{% for a in each.skill %}
+  - {{ a }}
+{% endfor %}
 {% endfor %}
 {% endif %}
 
