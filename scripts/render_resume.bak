@@ -78,49 +78,6 @@ def merge_dict(a, b, parent_append_mode=None, parent_merge_mode=None):
     
     return a
 
-def render_html(
-    base_yaml_bytes: bytes,
-    overlay_yaml_bytes: bytes = None,
-    template_bytes: bytes = None,
-    template_file: str = None
-) -> str:
-    """
-    Render resume data to HTML, merging base and overlay YAML into a Jinja2 template.
-    """
-    import yaml, jinja2, os
-
-    # Load base YAML
-    data = yaml.safe_load(base_yaml_bytes)
-
-    # Merge overlay if provided
-    if overlay_yaml_bytes:
-        overlay = yaml.safe_load(overlay_yaml_bytes)
-        merge_dict(data, overlay)
-
-    # Prepare Jinja2 template
-    if template_bytes:
-        # Render directly from provided template string
-        tpl = template_bytes.decode('utf-8')
-        template = jinja2.Environment(
-            loader=jinja2.BaseLoader(),
-            autoescape=True
-        ).from_string(tpl)
-    else:
-        # Fallback to loading from a file path
-        if not template_file:
-            raise ValueError("No template_bytes or template_file provided")
-        tpl_path = os.path.abspath(template_file)
-        tpl_dir = os.path.dirname(tpl_path)
-        tpl_name = os.path.basename(tpl_path)
-        env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(tpl_dir),
-            autoescape=True
-        )
-        template = env.get_template(tpl_name)
-
-    # Render and return HTML
-    return template.render(resume=data)
-
 def main():
     p = argparse.ArgumentParser(
         description="Render a resume YAML through a Jinja2 template."
@@ -137,28 +94,34 @@ def main():
     )
     args = p.parse_args()
 
-    # Read input files as bytes
-    with open(args.base, 'rb') as f:
-        base_bytes = f.read()
-    overlay_bytes = None
+    # Load and merge YAML
+    with open(args.base, 'r') as f:
+        data = yaml.safe_load(f)
     if args.overlay:
-        with open(args.overlay, 'rb') as f:
-            overlay_bytes = f.read()
-    # Read template file as bytes
-    with open(args.template_file, 'rb') as f:
-        template_bytes = f.read()
+        with open(args.overlay, 'r') as f:
+            overlay = yaml.safe_load(f)
+        merge_dict(data, overlay)
 
-    # Render HTML using reusable function
-    rendered = render_html(
-        base_yaml_bytes=base_bytes,
-        overlay_yaml_bytes=overlay_bytes,
-        template_bytes=template_bytes
+    # Verify template exists
+    tpl_path = os.path.abspath(args.template_file)
+    if not os.path.isfile(tpl_path):
+        sys.exit(f"Error: template file not found at '{tpl_path}'")
+
+    # Set up Jinja2 loader to the template's directory
+    tpl_dir  = os.path.dirname(tpl_path)
+    tpl_name = os.path.basename(tpl_path)
+    env = jinja2.Environment(
+        loader=jinja2.FileSystemLoader(tpl_dir),
+        autoescape=True,
     )
+    template = env.get_template(tpl_name)
 
+    # Render and write
+    rendered = template.render(resume=data)
     with open(args.output, 'w') as f:
         f.write(rendered)
 
-    print(f"Rendered resume to {args.output} using template '{os.path.basename(args.template_file)}'")
+    print(f"Rendered resume to {args.output} using template '{tpl_name}'")
 
 if __name__ == "__main__":
     main()

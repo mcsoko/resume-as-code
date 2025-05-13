@@ -4,6 +4,7 @@ import yaml
 import jinja2
 import sys
 import os
+import re
 
 def merge_dict(a, b, parent_append_mode=None, parent_merge_mode=None):
     """Simple recursive merge with Helm-like append control.
@@ -82,7 +83,8 @@ def render_html(
     base_yaml_bytes: bytes,
     overlay_yaml_bytes: bytes = None,
     template_bytes: bytes = None,
-    template_file: str = None
+    template_file: str = None,
+    css_bytes: bytes = None
 ) -> str:
     """
     Render resume data to HTML, merging base and overlay YAML into a Jinja2 template.
@@ -118,8 +120,30 @@ def render_html(
         )
         template = env.get_template(tpl_name)
 
-    # Render and return HTML
-    return template.render(resume=data)
+    rendered_html = template.render(resume=data)
+    # Inline CSS if provided
+    if css_bytes:
+        css = css_bytes.decode('utf-8')
+        # Attempt to inject before </head> (case-insensitive)
+        if re.search(r'</head>', rendered_html, flags=re.IGNORECASE):
+            rendered_html = re.sub(
+                r'(?i)</head>',
+                f"<style>\n{css}\n</style></head>",
+                rendered_html,
+                count=1
+            )
+        # Fallback to injecting after opening <head ...> tag
+        elif re.search(r'<head[^>]*>', rendered_html, flags=re.IGNORECASE):
+            rendered_html = re.sub(
+                r'(?i)(<head[^>]*>)',
+                lambda m: f"{m.group(1)}\n<style>\n{css}\n</style>",
+                rendered_html,
+                count=1
+            )
+        else:
+            # No head tag found; prepend style at top
+            rendered_html = f"<style>\n{css}\n</style>\n" + rendered_html
+    return rendered_html
 
 def main():
     p = argparse.ArgumentParser(
@@ -135,6 +159,10 @@ def main():
         default="templates/resume.html.j2",
         help="Path to the Jinja2 template file"
     )
+    p.add_argument(
+        "--css-file", "-c",
+        help="Optional CSS file to embed in the rendered HTML"
+    )
     args = p.parse_args()
 
     # Read input files as bytes
@@ -148,11 +176,17 @@ def main():
     with open(args.template_file, 'rb') as f:
         template_bytes = f.read()
 
+    css_bytes = None
+    if args.css_file:
+        with open(args.css_file, 'rb') as f:
+            css_bytes = f.read()
+
     # Render HTML using reusable function
     rendered = render_html(
         base_yaml_bytes=base_bytes,
         overlay_yaml_bytes=overlay_bytes,
-        template_bytes=template_bytes
+        template_bytes=template_bytes,
+        css_bytes=css_bytes
     )
 
     with open(args.output, 'w') as f:

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Parser Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resume Parser Test</h1>
+    
+    <form id="parserForm">
+        <div class="form-group">
+            <label for="resumeFile">Resume PDF File:</label>
+            <input type="file" id="resumeFile" accept=".pdf" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="skillList">Skills (comma-separated):</label>
+            <input type="text" id="skillList" placeholder="python,javascript,react">
+        </div>
+        
+        <div class="form-group">
+            <label for="jdKeywords">Job Description Keywords (comma-separated):</label>
+            <input type="text" id="jdKeywords" placeholder="senior,developer,frontend">
+        </div>
+        
+        <button type="button" onclick="parseResume()">Parse Resume</button>
+    </form>
+    
+    <h2>Results:</h2>
+    <div id="result">No results yet</div>
+    
+    <script>
+        async function parseResume() {
+            const fileInput = document.getElementById('resumeFile');
+            const skillList = document.getElementById('skillList').value;
+            const jdKeywords = document.getElementById('jdKeywords').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!fileInput.files.length) {
+                alert('Please select a PDF file');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('resume_file', fileInput.files[0]);
+            formData.append('skill_list', skillList);
+            formData.append('jd_keywords', jdKeywords);
+            
+            resultDiv.textContent = 'Processing...';
+            
+            try {
+                const response = await fetch('http://localhost:8000/parse/resume', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html> 

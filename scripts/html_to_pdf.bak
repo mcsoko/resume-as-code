@@ -11,53 +11,6 @@ import shutil
 from pathlib import Path
 from weasyprint import HTML, CSS
 
-# Shared print CSS for both file-based and string-based conversion
-CSS_STRING = '''
-    @page {
-        size: letter;
-        margin: 0.5in;
-    }
-    @media print {
-        body {
-            font-size: 11pt;
-        }
-        
-        .section-header:before,
-        .section-header:after {
-            border-top: 1px dashed var(--accent) !important;
-            width: 35% !important;
-        }
-        
-        .skill-item {
-            margin-right: 15px;
-        }
-        
-        /* Ensure proper breaking across pages */
-        .experience-item {
-            page-break-inside: avoid;
-        }
-        
-        /* Add some breathing room at top of pages */
-        h2 {
-            margin-top: 10px;
-        }
-        
-        /* Better list appearance in PDF */
-        .highlights li {
-            list-style-type: disc;
-            margin-left: 5px;
-        }
-    }
-'''
-
-def html_to_pdf(html_content: str) -> bytes:
-    """
-    Convert HTML content to PDF bytes using WeasyPrint.
-    """
-    # Generate PDF bytes using shared print CSS
-    pdf_bytes = HTML(string=html_content).write_pdf(stylesheets=[CSS(string=CSS_STRING)])
-    return pdf_bytes
-
 def convert_html_to_pdf(html_path, pdf_path):
     """
     Convert HTML file to PDF using WeasyPrint.
@@ -72,7 +25,43 @@ def convert_html_to_pdf(html_path, pdf_path):
         os.makedirs(output_dir)
     
     # Custom print CSS
-    additional_css = CSS(string=CSS_STRING)
+    additional_css = CSS(string='''
+        @page {
+            size: letter;
+            margin: 0.5in;
+        }
+        @media print {
+            body {
+                font-size: 11pt;
+            }
+            
+            .section-header:before,
+            .section-header:after {
+                border-top: 1px dashed var(--accent) !important;
+                width: 35% !important;
+            }
+            
+            .skill-item {
+                margin-right: 15px;
+            }
+            
+            /* Ensure proper breaking across pages */
+            .experience-item {
+                page-break-inside: avoid;
+            }
+            
+            /* Add some breathing room at top of pages */
+            h2 {
+                margin-top: 10px;
+            }
+            
+            /* Better list appearance in PDF */
+            .highlights li {
+                list-style-type: disc;
+                margin-left: 5px;
+            }
+        }
+    ''')
     
     # Convert HTML to PDF
     print(f"Converting {html_path} to {pdf_path}...")

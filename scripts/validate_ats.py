@@ -4,12 +4,30 @@ import sys
 import re
 import json
 from collections import Counter
-import nltk
-import spacy
-from pdfminer.high_level import extract_text
-from resume_parser import extract_text_from_pdf, extract_name, extract_contact_info, extract_position, extract_education, extract_experience, extract_skills
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+import platform
+
+# Check Python version first
+python_version = tuple(map(int, platform.python_version_tuple()))
+if python_version[0] == 3 and python_version[1] >= 13:
+    print(f"\nWarning: You are using Python {platform.python_version()}, but this script requires Python 3.9-3.10 for best compatibility.")
+    print("Please use a compatible Python version with: python3.9 scripts/validate_ats.py <resume.pdf> <job_description.txt>")
+    print("Or create a virtual environment with Python 3.9 and install the required packages.")
+    sys.exit(1)
+
+try:
+    import nltk
+    import spacy
+    from pdfminer.high_level import extract_text
+    from resume_parser import extract_text_from_pdf, extract_name, extract_contact_info, extract_position, extract_education, extract_experience, extract_skills
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics.pairwise import cosine_similarity
+except ImportError as e:
+    print(f"\nError: Missing required package: {e.name}")
+    print("Please install the required packages using:")
+    print("  pip install resume-parser nltk spacy scikit-learn pdfminer.six")
+    print("  python -m spacy download en_core_web_md")
+    print("  python -m nltk.downloader punkt stopwords")
+    sys.exit(1)
 
 # Download necessary NLTK data if not already downloaded
 try:
@@ -397,7 +415,7 @@ def analyze_resume_structure(data, text):
         recommendations.append("Education section is missing - include your educational background")
     
     # Check for quantifiable achievements
-    achievement_pattern = r'\b(?:increased|reduced|improved|achieved|won|saved|grew|generated|delivered)\b.*?\b\d+%?\b'
+    achievement_pattern = r'\b(?:increased|decreased|improved|achieved|created|developed|managed|led)\b.*?\b\d+%?\b'
     if not re.search(achievement_pattern, text, re.IGNORECASE):
         recommendations.append("Consider adding quantifiable achievements (e.g., 'Increased performance by 20%')")
     
@@ -411,13 +429,20 @@ def analyze_resume_structure(data, text):
 
 
 def main():
-    if len(sys.argv) != 3:
-        print("Usage: validate_ats.py <resume.pdf> <job_description.txt>")
+    if len(sys.argv) < 2:
+        print("Usage: validate_ats.py <resume.pdf> [job_description.txt]")
         sys.exit(1)
 
-    resume_path, jd_path = sys.argv[1], sys.argv[2]
-    if not os.path.exists(resume_path) or not os.path.exists(jd_path):
-        print("Error: One or more files not found.")
+    resume_path = sys.argv[1]
+    job_description_provided = len(sys.argv) > 2
+    jd_path = sys.argv[2] if job_description_provided else None
+    
+    if not os.path.exists(resume_path):
+        print(f"Error: Resume file not found: {resume_path}")
+        sys.exit(1)
+    
+    if job_description_provided and not os.path.exists(jd_path):
+        print(f"Error: Job description file not found: {jd_path}")
         sys.exit(1)
 
     print("\nParsing resume using resume_parser...")
@@ -427,26 +452,34 @@ def main():
     # Extract full text for additional analysis
     resume_text = resume_data.get('text', '')
     
-    # Load job description
-    with open(jd_path, 'r', encoding='utf-8') as f:
-        jd_text = f.read()
-    
     # 2. Analyze ATS compatibility
     ats_issues = analyze_resume_ats_compatibility(resume_path)
     
-    # 3. Extract skills from job description
-    jd_skills = extract_job_description_skills(jd_text)
+    # 3. Process job description if provided
+    jd_text = ""
+    jd_skills = []
+    match_results = {}
     
-    # 4. Compute match between resume and job description
-    match_results = compute_resume_jd_match(resume_text, jd_text, resume_data.get('skills', []), jd_skills)
+    if job_description_provided:
+        print("Analyzing job description...")
+        with open(jd_path, 'r', encoding='utf-8') as f:
+            jd_text = f.read()
+        
+        # Extract skills from job description
+        jd_skills = extract_job_description_skills(jd_text)
+        
+        # Compute match between resume and job description
+        match_results = compute_resume_jd_match(resume_text, jd_text, resume_data.get('skills', []), jd_skills)
     
-    # 5. Analyze resume structure
+    # 4. Analyze resume structure
     structure_recommendations = analyze_resume_structure(resume_data, resume_text)
     
-    # 6. Generate specific recommendations
-    recommendations = generate_recommendations(resume_data, resume_text, jd_text, jd_skills, match_results, ats_issues)
+    # 5. Generate specific recommendations
+    recommendations = {}
+    if job_description_provided:
+        recommendations = generate_recommendations(resume_data, resume_text, jd_text, jd_skills, match_results, ats_issues)
     
-    # 7. Output the comprehensive report
+    # 6. Output the comprehensive report
     print("\n" + "="*50)
     print("              ATS VALIDATION REPORT")
     print("="*50 + "\n")
@@ -486,38 +519,50 @@ def main():
     else:
         print("  ✓ Resume structure looks good")
     
-    print("\nJOB DESCRIPTION MATCH:")
-    print(f"  Overall Text Similarity: {match_results['overall_similarity']*100:.1f}%")
-    print(f"  Skill Match Rate: {match_results['total_match_rate']*100:.1f}%")
-    
-    print("\nSKILLS ANALYSIS:")
-    print("  Skills Found in Resume:")
-    if resume_data.get('skills'):
-        for skill in resume_data.get('skills', []):
-            print(f"    • {skill}")
+    if job_description_provided:
+        print("\nJOB DESCRIPTION MATCH:")
+        print(f"  Overall Text Similarity: {match_results['overall_similarity']*100:.1f}%")
+        print(f"  Skill Match Rate: {match_results['total_match_rate']*100:.1f}%")
+        
+        print("\nSKILLS ANALYSIS:")
+        print("  Skills Found in Resume:")
+        if resume_data.get('skills'):
+            for skill in resume_data.get('skills', [])[:15]:  # Limit to top 15 for readability
+                print(f"    • {skill}")
+            if len(resume_data.get('skills', [])) > 15:
+                print(f"    • ... and {len(resume_data.get('skills', [])) - 15} more")
+        else:
+            print("    None found")
+        
+        print("\n  Skills Required in Job Description:")
+        if jd_skills:
+            for skill in jd_skills:
+                if skill.lower() in [s.lower() for s in match_results['matched_skills']]:
+                    print(f"    ✓ {skill}")
+                elif skill.lower() in [s.lower() for s in match_results['partial_matches']]:
+                    print(f"    ~ {skill} (partial match)")
+                else:
+                    print(f"    ✗ {skill} (missing)")
+        else:
+            print("    None extracted")
+        
+        print("\nRECOMMENDATIONS:")
+        if recommendations:
+            for category, recs in recommendations.items():
+                print(f"  {category}:")
+                for rec in recs:
+                    print(f"    • {rec}")
+        else:
+            print("  Your resume is well-optimized for this job posting.")
     else:
-        print("    None found")
-    
-    print("\n  Skills Required in Job Description:")
-    if jd_skills:
-        for skill in jd_skills:
-            if skill.lower() in [s.lower() for s in match_results['matched_skills']]:
-                print(f"    ✓ {skill}")
-            elif skill.lower() in [s.lower() for s in match_results['partial_matches']]:
-                print(f"    ~ {skill} (partial match)")
-            else:
-                print(f"    ✗ {skill} (missing)")
-    else:
-        print("    None extracted")
-    
-    print("\nRECOMMENDATIONS:")
-    if recommendations:
-        for category, recs in recommendations.items():
-            print(f"  {category}:")
-            for rec in recs:
-                print(f"    • {rec}")
-    else:
-        print("  Your resume is well-optimized for this job posting.")
+        print("\nGENERAL RECOMMENDATIONS:")
+        print("  • Keep formatting simple and consistent")
+        print("  • Use standard section headings (Experience, Education, Skills)")
+        print("  • Include keywords from job descriptions you apply to")
+        print("  • Highlight achievements with metrics when possible")
+        print("  • Tailor your resume for each application")
+        print("  • Run this script with a job description file for more specific insights:")
+        print("    python scripts/validate_ats.py output/resume.pdf templates/job_description_example.txt")
     
     print("\n" + "="*50)
 

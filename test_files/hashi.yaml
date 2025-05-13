@@ -1,0 +1,15 @@
+_append: [Leadership, Technical]
+
+# Skills to add
+skills:
+  Leadership:
+    - "Cross-functional Collaboration"
+    - "Strategic Planning"
+  Technical:
+    - "GitOps"
+    - "Service Mesh"
+    - "Cloud Cost Optimization"
+position:
+  title: "Solutions Engineer"
+  keywords:
+    - 
